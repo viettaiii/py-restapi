@@ -1,19 +1,17 @@
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticatedOrReadOnly , IsAuthenticated , DjangoModelPermissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.authentication import SessionAuthentication
 from .models import Product
 from .serializers import ProductSerializer
-from api.authentication import TokenAuthentication
 from django.shortcuts import get_object_or_404
+from api.mixins import  StaffEditorMixin
 
-from .permissions import IsStaffEditor
-class ProductListCreateApiView(generics.ListCreateAPIView):
+class ProductListCreateApiView(
+    StaffEditorMixin,
+    generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     # authentication_classes = [SessionAuthentication, TokenAuthentication]
-    permission_classes = [IsAuthenticated,IsStaffEditor]
     def perform_create(self, serializer):
         serializer.save()
   
