@@ -8,13 +8,18 @@ from rest_framework.decorators import api_view
 import json
 
 from products.models import Product
+from products.serializers import ProductSerializer
 
-
-@api_view(['POST'])
+@api_view(['GET'])
 def api_home(request, *args , **kwargs):
-    model_data = Product.objects.all().order_by('?').first()
+    # model_data = Product.objects.all().order_by('?').first()
+    # data = {}
+    # if model_data:
+    #     data = model_to_dict(model_data , fields=['title','content','price' ,'sale_price'])
+
+    instance = Product.objects.all().order_by('?').first()
     data = {}
-    if model_data:
-        data = model_to_dict(model_data)
+    if instance:
+        data = ProductSerializer(instance).data
   
     return Response(data )

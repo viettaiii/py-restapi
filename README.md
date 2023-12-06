@@ -56,3 +56,9 @@ testserver: Khởi chạy một máy chủ dựa trên cơ sở dữ liệu test
 
 
 
+## serializer (django rest framework) and form (django) (Data transfer object)
+    - Dùng để lọc dữ liệu, những trường sẽ được output ví dụ (JSON,...)
+
+    
+
+
