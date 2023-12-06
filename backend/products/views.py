@@ -1,5 +1,5 @@
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticatedOrReadOnly , IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly , IsAuthenticated , DjangoModelPermissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -11,7 +11,7 @@ class ProductListCreateApiView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [DjangoModelPermissions]
     def perform_create(self, serializer):
         serializer.save()
   
