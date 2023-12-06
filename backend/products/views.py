@@ -7,11 +7,13 @@ from .models import Product
 from .serializers import ProductSerializer
 
 from django.shortcuts import get_object_or_404
+
+from .permissions import IsStaffEditor
 class ProductListCreateApiView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [DjangoModelPermissions]
+    permission_classes = [IsAuthenticated,IsStaffEditor]
     def perform_create(self, serializer):
         serializer.save()
   
