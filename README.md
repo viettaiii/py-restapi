@@ -53,3 +53,4 @@ startproject: Tạo một project Django mới.
 test: Chạy các test case đã được định nghĩa trong ứng dụng.
 
 testserver: Khởi chạy một máy chủ dựa trên cơ sở dữ liệu test mà không làm ảnh hưởng đến cơ sở dữ liệu chính.
+
