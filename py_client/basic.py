@@ -3,6 +3,6 @@ import requests
 
 endpoint = "http://localhost:8000/api/"
 
-get_response = requests.get(endpoint) 
-print(get_response.text)
-print(get_response)
+response = requests.get(endpoint , params= {'abc':'123' , "a":1}  , json={"query":"Hello world!"}) 
+# print(response.text)
+print(response.json())
