@@ -1,15 +1,14 @@
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
+from django.forms.models import model_to_dict
+from django.core.serializers import serialize
 import json
 
 from products.models import Product
 
 def api_home(request, *args , **kwargs):
-    model_data = Product.objects.all().order_by('?').first()
+    model_data = Product.objects.all()
     data = {}
     if model_data:
-        data['id'] = model_data.id
-        data['title'] = model_data.title
-        data['content'] = model_data.content
-        data['price'] = model_data.price
-
-    return JsonResponse(data)
+        data = serialize('json' , model_data)
+  
+    return JsonResponse(data , safe=False)
